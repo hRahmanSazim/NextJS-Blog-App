@@ -66,17 +66,33 @@ export default async function Home() {
       <HeaderDefault />
       <HomeCarousel />
       {/* <div className="bg-red-100 flex items-center h-80 w-full"></div> */}
-      <div className=" w-full h-28 bg-blue-gray-200 "></div>
-      <div className="flex flex-col w-full h-68 justify-center items-center gap-6 pt-14">
-        {/* <p className="p-10">Recent Posts</p> */}
-        <div className="flex">
+      <div className=" w-full h-28 bg-white "></div>
+      <div className="flex flex-col w-[964px] m-auto">
+        <div className="flex-grow h-14">
           {" "}
-          <p className="pr-80 text-3xl">RECENT POSTS</p>
+          <p className="text-2xl">Recent Posts</p>
         </div>
-        <div className="max-w-full h-full">
-          <PostList postData={posts} />
-        </div>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <div className="flex-grow h-[250px] bg-blue-100 mb-4">
+              <Link href={`/blog/${post.id}`}>{post.title}</Link>
+            </div>
+          </li>
+        ))}
+        {/* <div className="flex-grow h-[250px] bg-blue-100 mb-4"> */}
+        {/* <Link
+            href={{
+              pathname: "/blog/[id]",
+            }}
+          >
+            going to blog page
+          </Link> */}
+        {/* <Link href={`/blog/${posts[1].id}`}>Dashboard</Link> */}
+        {/* </div>
+        <div className="flex-grow h-[250px] bg-green-100 mb-4"></div>
+        <div className="flex-grow h-[250px] bg-red-100 mb-4"></div> */}
       </div>
+
       {/* <Link href={`/blog/${posts.id}`}>go to new page</Link> */}
     </main>
   );
