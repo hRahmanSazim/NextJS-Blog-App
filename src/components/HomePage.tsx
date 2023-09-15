@@ -1,29 +1,12 @@
 "use client";
 
 import { Carousel } from "@material-tailwind/react";
-import type { NavbarProps } from "@material-tailwind/react";
-import React from "react";
-import { useEffect } from "react";
-import {
-  Navbar,
-  MobileNav,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-tailwind/react";
-
-export function HomeCarousel({ products }) {
-  return (
-    <Carousel className="h-52">
-      <img src={products[4].thumbnail} alt="image 1" className="w-full h-52" />
-      <img src={products[2].thumbnail} alt="image 2" className="w-full h-52" />
-      <img src={products[3].thumbnail} alt="image 3" className="w-full h-52" />
-    </Carousel>
-  );
-}
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Navbar, Typography } from "@material-tailwind/react";
 
 export function HeaderDefault() {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
     window.addEventListener(
@@ -51,5 +34,40 @@ export function HeaderDefault() {
         </a>
       </div>
     </Navbar>
+  );
+}
+
+export function HomeCarousel() {
+  return (
+    <Carousel>
+      <Image
+        src={"https://random.imagecdn.app/1070/320"}
+        alt="image 2"
+        // className="w-full h-52"
+        height={320}
+        width={1080}
+        // layout="fill"
+
+        // style={{ objectFit: "contain" }}
+      />
+      <Image
+        src={"https://random.imagecdn.app/1060/320"}
+        alt="image 1"
+        // className="w-full h-52"
+        // height={320}
+        // width={1080}
+        // style={{ objectFit: "contain" }}
+        layout="fill"
+        // objectFit="contain"
+      />
+      <Image
+        src={"https://random.imagecdn.app/1080/320"}
+        alt="image 3"
+        // className="w-full h-52"
+        height={320}
+        width={1080}
+        // layout="fill"
+      />
+    </Carousel>
   );
 }
