@@ -11,7 +11,7 @@ interface GetPostsResponse {
   skip: number;
   limit: number;
 }
-interface GetUsersResponse {
+export interface GetUsersResponse {
   users: User[];
   total: number;
   skip: number;
@@ -26,11 +26,11 @@ interface GetCommentsResponse {
 
 export async function getUsers(): Promise<User[]> {
   const { data } = await axios.get<GetUsersResponse>(
-    "https://dummyjson.com/users"
+    "https://dummyjson.com/users/"
   );
   return data.users;
 }
-async function getPosts(): Promise<Post[]> {
+export async function getPosts(): Promise<Post[]> {
   const { data } = await axios.get<GetPostsResponse>(
     "https://dummyjson.com/posts?limit=30"
   );
@@ -44,8 +44,8 @@ async function getComments(): Promise<Comment[]> {
 }
 
 export default async function Home() {
-  const users = await getUsers();
-  const comments = await getComments();
+  // const users = await getUsers();
+  // const comments = await getComments();
   const posts = await getPosts();
 
   const randomImage = Array.from(
