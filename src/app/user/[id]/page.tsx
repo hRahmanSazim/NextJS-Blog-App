@@ -71,7 +71,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-3">
+                  <p className="line-clamp-2">
                     {posts[Number(params.id) - 2].body}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-3">
+                  <p className="line-clamp-2">
                     {posts[Number(params.id) - 1].body}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-3">
+                  <p className="line-clamp-2">
                     {posts[Number(params.id) - 3].body}
                   </p>
                 </div>
