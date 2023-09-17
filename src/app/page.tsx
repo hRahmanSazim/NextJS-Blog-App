@@ -1,7 +1,8 @@
 import { HomeCarousel, HeaderDefault } from "../components/HomePage";
 import axios from "axios";
 import Link from "next/link";
-import PostList from "../components/PostList";
+import Image from "next/image";
+
 import { Comment, Post, User } from "@/types";
 
 interface GetPostsResponse {
@@ -23,7 +24,7 @@ interface GetCommentsResponse {
   limit: number;
 }
 
-async function getUsers(): Promise<User[]> {
+export async function getUsers(): Promise<User[]> {
   const { data } = await axios.get<GetUsersResponse>(
     "https://dummyjson.com/users"
   );
@@ -31,7 +32,7 @@ async function getUsers(): Promise<User[]> {
 }
 async function getPosts(): Promise<Post[]> {
   const { data } = await axios.get<GetPostsResponse>(
-    "https://dummyjson.com/posts?limit=5"
+    "https://dummyjson.com/posts?limit=30"
   );
   return data.posts;
 }
@@ -70,14 +71,39 @@ export default async function Home() {
       <div className="flex flex-col w-[964px] m-auto">
         <div className="flex-grow h-14">
           {" "}
-          <p className="text-2xl">Recent Posts</p>
+          <p className="text-4xl">Recent Posts</p>
         </div>
         {posts.map((post) => (
-          <li key={post.id}>
-            <div className="flex-grow h-[250px] bg-blue-100 mb-4">
-              <Link href={`/blog/${post.id}`}>{post.title}</Link>
+          <ul key={post.id}>
+            <div className="flex flex-row flex-grow h-[250px] mb-4">
+              <div className="flex mb-4">
+                <div className="w-[250px]">
+                  <Image
+                    src={"https://picsum.photos/250"}
+                    alt="post_image"
+                    width={250}
+                    height={250}
+                  />
+                </div>
+                <div className="flex-col">
+                  <Link href={`/blog/${post.id}`}>
+                    <p className="text-2xl pl-6 ">{post.title}</p>
+                  </Link>
+                  <p className="text-blue-700 pl-6 text-2xl pt-2">Author </p>
+                  <p className="w-[500px] pl-6 ">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the standard
+                    dummy text ever since the 1500s, when an unknown printer
+                    took a galley of type and scrambled it to make a type
+                    specimen book.
+                  </p>
+                  <p className="text-gray-600 pl-6 pt-4">
+                    Posted: 23 August, 2023
+                  </p>
+                </div>
+              </div>
             </div>
-          </li>
+          </ul>
         ))}
         {/* <div className="flex-grow h-[250px] bg-blue-100 mb-4"> */}
         {/* <Link

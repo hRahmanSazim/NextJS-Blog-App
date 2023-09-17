@@ -41,31 +41,31 @@ export function HomeCarousel() {
   return (
     <Carousel>
       <Image
-        src={"https://random.imagecdn.app/1070/320"}
-        alt="image 2"
+        src={"https://picsum.photos/1300/320"}
+        alt="image 1"
         // className="w-full h-52"
         height={320}
-        width={1080}
+        width={2000}
         // layout="fill"
 
         // style={{ objectFit: "contain" }}
       />
       <Image
-        src={"https://random.imagecdn.app/1060/320"}
-        alt="image 1"
+        src={"https://picsum.photos/1301/320"}
+        alt="image 2"
         // className="w-full h-52"
-        // height={320}
-        // width={1080}
+        height={320}
+        width={2000}
         // style={{ objectFit: "contain" }}
-        layout="fill"
+        // layout="fill"
         // objectFit="contain"
       />
       <Image
-        src={"https://random.imagecdn.app/1080/320"}
+        src={"https://picsum.photos/1302/320"}
         alt="image 3"
         // className="w-full h-52"
         height={320}
-        width={1080}
+        width={2000}
         // layout="fill"
       />
     </Carousel>
