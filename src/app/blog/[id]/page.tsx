@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Post, User, Comment } from "@/types";
 import StarComponent from "@/components/StarComponent";
 
-interface Params {
+export interface Params {
   params: { id: string };
 }
 interface GetPostResponse extends Post {}

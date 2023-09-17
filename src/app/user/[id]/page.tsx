@@ -1,8 +1,8 @@
 import React from "react";
-
-const page = ({ params }: { params: { id: number } }) => {
+import { Params } from "@/app/blog/[id]/page";
+const page = ({ params }: Params) => {
   return (
-    <div className="flex flex-col bg-red-100 w-[1080px] h-[2/3]justify-center">
+    <div className="flex items-center justify-center h-screen border-2 border-black">
       page
     </div>
   );
