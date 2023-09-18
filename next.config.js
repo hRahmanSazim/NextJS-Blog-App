@@ -9,6 +9,9 @@ module.exports = {
       "random.imagecdn.app",
       "picsum.photos",
       "robohash.org",
+      "freelogopng.com",
+      "img.freepik.com",
     ],
+    disableStaticImages: true,
   },
 };

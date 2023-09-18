@@ -2,12 +2,15 @@ import React from "react";
 import { Params } from "@/app/blog/[id]/page";
 import { getPosts, getUsers } from "@/app/page";
 import Image from "next/image";
-import twitterIcon from "../../../../public/logo+twitter+twitter+logo+icon-1320167831451644641.png";
-import linkedinIcon from "../../../../public/linkedin+network+social+icon-1320086082965629906.png";
+
 export default async function User({ params }: Params) {
   const users = await getUsers();
   const posts = await getPosts();
-
+  const randomImage = Array.from(
+    { length: 3 },
+    (max: number = 29, min: number = 1) =>
+      Math.floor(Math.random() * (max - min + 1)) + min
+  );
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-row w-4/5  justify-center h-4/5 m-10">
@@ -30,18 +33,22 @@ export default async function User({ params }: Params) {
             </div>
             <div>{users[Number(params.id) - 1].address.address}</div>
             <div>{users[Number(params.id) - 1].address.city}</div>
-            <div className="flex flex-row justify-center">
+            <div className="flex flex-row justify-center pt-2 gap-2">
               <Image
-                src={twitterIcon}
+                src={
+                  "https://freelogopng.com/images/all_img/1657043345twitter-logo-png.png"
+                }
                 alt="avatar"
-                height={32}
-                width={32}
+                height={26}
+                width={26}
               ></Image>
               <Image
-                src={linkedinIcon}
+                src={
+                  "https://img.freepik.com/premium-vector/linkedin-icon_488108-5.jpg?w=826"
+                }
                 alt="avatar"
-                height={32}
-                width={32}
+                height={36}
+                width={36}
               ></Image>
             </div>
           </div>
@@ -60,7 +67,7 @@ export default async function User({ params }: Params) {
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
                 <div className="flex flex-row justify-between">
-                  <p>{posts[Number(params.id) - 2].title}</p>
+                  <p>{posts[randomImage[0]].title}</p>
                   <div className="pr-10 pb-4">
                     <button className="text-gray-700 w-18 h-10 pr-4">
                       Edit
@@ -71,9 +78,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-2">
-                    {posts[Number(params.id) - 2].body}
-                  </p>
+                  <p className="line-clamp-2">{posts[randomImage[0]].body}</p>
                 </div>
               </div>
             </div>
@@ -88,9 +93,7 @@ export default async function User({ params }: Params) {
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
                 <div className="flex flex-row justify-between">
-                  <p className="truncate">
-                    {posts[Number(params.id) - 1].title}
-                  </p>
+                  <p className="truncate">{posts[randomImage[1]].title}</p>
                   <div className="pr-10 pb-4">
                     <button className="text-gray-700 w-18 h-10 pr-4">
                       Edit
@@ -101,9 +104,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-2">
-                    {posts[Number(params.id) - 1].body}
-                  </p>
+                  <p className="line-clamp-2">{posts[randomImage[1]].body}</p>
                 </div>
               </div>
             </div>
@@ -118,9 +119,7 @@ export default async function User({ params }: Params) {
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
                 <div className="flex flex-row justify-between">
-                  <p className="truncate">
-                    {posts[Number(params.id) - 3].title}
-                  </p>
+                  <p className="truncate">{posts[randomImage[2]].title}</p>
                   <div className="pr-10 pb-4">
                     <button className="text-gray-700 w-18 h-10 pr-4">
                       Edit
@@ -131,9 +130,7 @@ export default async function User({ params }: Params) {
                   </div>
                 </div>
                 <div>
-                  <p className="line-clamp-2">
-                    {posts[Number(params.id) - 3].body}
-                  </p>
+                  <p className="line-clamp-2">{posts[randomImage[2]].body}</p>
                 </div>
               </div>
             </div>

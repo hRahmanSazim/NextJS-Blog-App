@@ -44,8 +44,6 @@ async function getComments(): Promise<Comment[]> {
 }
 
 export default async function Home() {
-  // const users = await getUsers();
-  // const comments = await getComments();
   const posts = await getPosts();
 
   const randomImage = Array.from(
@@ -53,9 +51,11 @@ export default async function Home() {
     (max: number = 400, min: number = 300) =>
       Math.floor(Math.random() * (max - min + 1)) + min
   );
+
   return (
     <main title="Home Page" className="bg-white ">
       <HeaderDefault />
+
       <HomeCarousel />
 
       <div className=" w-full h-28 bg-white "></div>
