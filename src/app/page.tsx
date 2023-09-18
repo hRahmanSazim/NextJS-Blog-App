@@ -83,6 +83,7 @@ export default async function Home() {
                   </Link>
                   <p className="text-blue-700 pl-6 text-2xl pt-2">
                     Author: {users[count++].firstName}
+                    {users[count++].lastName}
                   </p>
                   <p className="w-[500px] pl-6 line-clamp-5">{post.body}</p>
                   <p className="text-gray-600 pl-6 pt-4">
