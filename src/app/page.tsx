@@ -2,7 +2,7 @@ import { HomeCarousel, HeaderDefault } from "../components/HomePage";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-
+import randomdate from "../components/randomdate.json";
 import { Comment, Post, User } from "@/types";
 
 interface GetPostsResponse {
@@ -45,13 +45,14 @@ async function getComments(): Promise<Comment[]> {
 
 export default async function Home() {
   const posts = await getPosts();
+  const users = await getUsers();
 
   const randomImage = Array.from(
     { length: 300 },
     (max: number = 400, min: number = 300) =>
       Math.floor(Math.random() * (max - min + 1)) + min
   );
-
+  let count = 0;
   return (
     <main title="Home Page" className="bg-white ">
       <HeaderDefault />
@@ -80,10 +81,12 @@ export default async function Home() {
                   <Link href={`/blog/${post.id}`}>
                     <p className="text-2xl pl-6">{post.title}</p>
                   </Link>
-                  <p className="text-blue-700 pl-6 text-2xl pt-2">Author </p>
+                  <p className="text-blue-700 pl-6 text-2xl pt-2">
+                    Author: {users[count++].firstName}
+                  </p>
                   <p className="w-[500px] pl-6 line-clamp-5">{post.body}</p>
                   <p className="text-gray-600 pl-6 pt-4">
-                    Posted: 23 August, 2023
+                    Posted: {randomdate[post.id]}
                   </p>
                 </div>
               </div>
