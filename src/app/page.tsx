@@ -78,10 +78,10 @@ export default async function Home() {
                 </div>
                 <div className="flex-col">
                   <Link href={`/blog/${post.id}`}>
-                    <p className="text-2xl pl-6 ">{post.title}</p>
+                    <p className="text-2xl pl-6">{post.title}</p>
                   </Link>
                   <p className="text-blue-700 pl-6 text-2xl pt-2">Author </p>
-                  <p className="w-[500px] pl-6 ">{post.body}</p>
+                  <p className="w-[500px] pl-6 line-clamp-5">{post.body}</p>
                   <p className="text-gray-600 pl-6 pt-4">
                     Posted: 23 August, 2023
                   </p>
