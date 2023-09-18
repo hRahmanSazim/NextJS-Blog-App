@@ -81,13 +81,7 @@ export default async function Home() {
                     <p className="text-2xl pl-6 ">{post.title}</p>
                   </Link>
                   <p className="text-blue-700 pl-6 text-2xl pt-2">Author </p>
-                  <p className="w-[500px] pl-6 ">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the standard
-                    dummy text ever since the 1500s, when an unknown printer
-                    took a galley of type and scrambled it to make a type
-                    specimen book.
-                  </p>
+                  <p className="w-[500px] pl-6 ">{post.body}</p>
                   <p className="text-gray-600 pl-6 pt-4">
                     Posted: 23 August, 2023
                   </p>
