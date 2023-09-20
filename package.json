@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.0.0",
+    "@mantine/hooks": "^7.0.0",
     "@material-tailwind/react": "^2.1.2",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/node": "20.6.0",
@@ -31,7 +33,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",
-    "postcss": "^8.4.29",
+    "postcss": "^8.4.30",
+    "postcss-preset-mantine": "^1.7.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.3.3"
   }
 }
