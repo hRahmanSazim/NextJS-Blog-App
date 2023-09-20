@@ -2,7 +2,9 @@
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "@mantine/form";
+import Link from "next/link";
+
+import { Flex, Paper, Text, Button, TextInput } from "@mantine/core";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -23,38 +25,52 @@ export default function Signup() {
     return router.push("/");
   };
   return (
-    <div className="wrapper border-2 border-red-400 w-screen">
-      <div className="flex justify-center items-center form-wrapper border-2 border-green-800 h-screen ">
-        <form onSubmit={handleForm} className="form">
-          <label htmlFor="email">
-            <p>Email</p>
-            <input
-              className="border-2 border-gray-400"
+    <Flex mih={"100%"} justify="center" align="center" direction="row">
+      <Paper shadow={"xl"} radius="lg" withBorder w={"auto"} p={"6rem"}>
+        <form onSubmit={handleForm}>
+          <Flex direction={"column"} gap="md" justify={"center"} w={"25rem"}>
+            <TextInput
               onChange={(e) => setEmail(e.target.value)}
+              label="Email"
               required
               type="email"
               name="email"
               id="email"
               placeholder="example@mail.com"
+              radius="md"
+              variant="filled"
+              size="lg"
             />
-          </label>
-          <label htmlFor="password">
-            <p>Password</p>
-            <input
-              className="border-2 border-gray-400"
+
+            <TextInput
+              label="Password"
               onChange={(e) => setPassword(e.target.value)}
               required
               type="password"
               name="password"
               id="password"
               placeholder="password"
+              radius="md"
+              variant="filled"
+              size="lg"
             />
-          </label>
-          <button type="submit" className="border-2 border-blue-600">
-            Sign up
-          </button>
+
+            <Flex direction="column" gap={"md"} pt={"lg"}>
+              <Button type="submit" size="lg">
+                Sign up
+              </Button>
+              <Flex direction="row" justify={"space-between"}>
+                <Text size="xl" pt={"0.3rem"}>
+                  Already registered? Login here:
+                </Text>
+                <Button size="md">
+                  <Link href={"/signin"}>Sign in</Link>
+                </Button>
+              </Flex>
+            </Flex>
+          </Flex>
         </form>
-      </div>
-    </div>
+      </Paper>
+    </Flex>
   );
 }

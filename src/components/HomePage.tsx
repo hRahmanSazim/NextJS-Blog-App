@@ -36,9 +36,15 @@ export function HeaderDefault() {
             <Link
               href="https://github.com/hRahmanSazim/NextJS-Blog-App"
               target="_"
-              className="underline text-1xl justify-center"
+              className="underline text-1xl justify-center pr-4"
             >
               Github Link
+            </Link>
+            <Link
+              href={"/signup"}
+              className="justify-center text-1xl underline"
+            >
+              Login/SignUp
             </Link>
           </div>
         </div>
