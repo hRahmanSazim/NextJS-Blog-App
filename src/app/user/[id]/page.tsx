@@ -62,7 +62,7 @@ export default async function User({ params }: Params) {
                   Number(params.id) + 302
                 )}/199`}
                 alt="user_pic"
-                width={192}
+                width={188}
                 height={159}
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
@@ -88,7 +88,7 @@ export default async function User({ params }: Params) {
                   Number(params.id) + 301
                 )}/199`}
                 alt="user_pic"
-                width={192}
+                width={188}
                 height={159}
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
@@ -114,7 +114,7 @@ export default async function User({ params }: Params) {
                   Number(params.id) + 300
                 )}/199`}
                 alt="user_pic"
-                width={192}
+                width={188}
                 height={159}
               ></Image>
               <div className="flex flex-col h-[46px] w-4/5 pl-4">
