@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import randomdate from "../components/randomdate.json";
 import { Comment, Post, User } from "@/types";
+import { Flex, Text } from "@mantine/core";
+import { useEffect } from "react";
 
 interface GetPostsResponse {
   posts: Post[];
@@ -54,46 +56,56 @@ export default async function Home() {
   );
   let count = 0;
   return (
-    <main title="Home Page" className="bg-white ">
+    <main>
       <HeaderDefault />
 
       <HomeCarousel />
 
-      <div className=" w-full h-28 bg-white "></div>
-      <div className="flex flex-col w-[964px] m-auto">
-        <div className="flex-grow h-14">
-          {" "}
-          <p className="text-4xl">Recent Posts</p>
-        </div>
-        {posts.map((post) => (
-          <ul key={post.id}>
-            <div className="flex flex-row flex-grow h-[250px] mb-4">
-              <div className="flex mb-4">
-                <div className="w-[250px]">
-                  <Image
-                    src={`https://picsum.photos/${randomImage[post.id]}`}
-                    alt="post_image"
-                    width={250}
-                    height={250}
-                  />
-                </div>
-                <div className="flex-col">
-                  <Link href={`/blog/${post.id}`}>
-                    <p className="text-2xl pl-6">{post.title}</p>
-                  </Link>
-                  <p className="text-blue-700 pl-6 text-2xl pt-2">
-                    Author: {users[count].firstName} {users[count++].lastName}
-                  </p>
-                  <p className="w-[500px] pl-6 line-clamp-5">{post.body}</p>
-                  <p className="text-gray-600 pl-6 pt-4">
-                    Posted: {randomdate[post.id]}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ul>
-        ))}
-      </div>
+      <Flex w="100%" h="5rem" bg={"white"} direction={"column"}></Flex>
+      <Flex direction={"column"} justify={"center"} align={"center"}>
+        <Text size="lg">Recent Posts</Text>
+
+        <Flex
+          direction={"column"}
+          w="80rem"
+          justify={"center"}
+          align={"center"}
+        >
+          <Flex h={"3.5rem"}> </Flex>
+          {posts.map((post) => (
+            <ul key={post.id}>
+              <Flex direction={"row"} h={"250px"} mb={"1rem"}>
+                <Flex mb={"1rem"}>
+                  <Flex w={"250px"}>
+                    <Image
+                      src={`https://picsum.photos/${randomImage[post.id]}`}
+                      alt="post_image"
+                      width={250}
+                      height={250}
+                    />
+                  </Flex>
+                  <Flex direction={"column"}>
+                    <Link href={`/blog/${post.id}`}>
+                      <Text size="1.5rem" pl="1.5rem">
+                        {post.title}
+                      </Text>
+                    </Link>
+                    <Text c={"blue"} pl={"1.5rem"} size="1.5rem" pt={"0.5rem"}>
+                      Author: {users[count].firstName} {users[count++].lastName}
+                    </Text>
+                    <Text w={"500px"} pl={"1.5rem"} lineClamp={5}>
+                      {post.body}
+                    </Text>
+                    <Text c={"gray"} pl={"1.5rem"} pt={"1rem"}>
+                      Posted: {randomdate[post.id]}
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </ul>
+          ))}
+        </Flex>
+      </Flex>
     </main>
   );
 }

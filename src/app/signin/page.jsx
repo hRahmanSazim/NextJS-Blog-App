@@ -1,21 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from "next/navigation";
-import { Flex, Paper, Text, Button, TextInput } from "@mantine/core";
-import Link from "next/link";
+import { Flex, Paper, Button, TextInput } from "@mantine/core";
+// import Link from "next/link";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+  const [test, setTest] = useState("");
+
+  useEffect(() => {}, []);
+
   const handleForm = async (event) => {
     event.preventDefault();
 
     const { result, error } = await signIn(email, password);
+    console.log(result);
+    // localStorage.setItem("accessToken", result.user.uid);
 
+    // clean this up
     if (error) {
+      alert("wrong credentials");
       return console.log(error);
     }
 
@@ -23,6 +31,10 @@ export default function SignIn() {
     console.log(result);
     return router.push("/");
   };
+
+  // if (test === "") {
+  //   return <div>You are not logged in</div>;
+  // }
   return (
     <Flex mih={"100%"} justify="center" align="center" direction="row">
       <Paper shadow={"xl"} radius="lg" withBorder w={"auto"} p={"6rem"}>

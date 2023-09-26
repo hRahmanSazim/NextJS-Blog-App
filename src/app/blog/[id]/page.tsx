@@ -2,6 +2,7 @@ import axios from "axios";
 import Image from "next/image";
 import { Post, User, Comment } from "@/types";
 import StarComponent from "@/components/StarComponent";
+import { Container, Flex, Text } from "@mantine/core";
 
 export interface Params {
   params: { id: string };
@@ -46,32 +47,46 @@ export default async function Blog({ params }: Params) {
   const commentThree = await getComment(commentIdArray[2]);
 
   return (
-    <div className="w-screen">
-      <div className=" flex h-[449px]">
+    <Container fluid>
+      <Flex h={"449px"}>
         <Image
           src="https://picsum.photos/2000/449"
           alt="image"
           height={449}
           width={2000}
         ></Image>
-      </div>
-      <div className="flex flex-col h-screen w-[959px] m-auto gap-8">
-        <div className=" flex-row h-56 bg-white pt-24"></div>
-        <div className="flex-row h-14 pb-6">
+      </Flex>
+      <Flex
+        h={"100vh"}
+        w={"959px"}
+        m={"auto"}
+        gap={"2rem"}
+        direction={"column"}
+      >
+        <Flex direction={"row"} h={"14rem"} bg={"white"} pt={"6rem"}></Flex>
+        <Flex direction={"row"} h={"3.5rem"} pb={"1.5rem"}>
           <p className="text-5xl">{post.title}</p>
-        </div>
-        <div className="flex pt-4 pb-8">
+        </Flex>
+        <Flex pt={"1rem"} pb={"2rem"}>
           <div className=" w-20 h-20 rounded-full pr-2 border-2 border-gray-400">
             <Image src={user.image} alt="avatar" width={80} height={80}></Image>
           </div>
-          <div className="w-56 h-20 pt-6 pl-4">
-            <p>{"Author: " + user.firstName + " " + user.lastName}</p>
-          </div>
-        </div>
-        <div className="flex-row h-[652px] text-2xl">{post.body}</div>
-        <div className=" flex-row h-[600px] bg-white">
-          <div className="flex mb-4">
-            <div className="w-1/2 flex-col h-[149px] mt-24">
+          <Flex w={"14rem"} h={"5rem"} pt={"1.5rem"} pl={"1rem"}>
+            <Text>{"Author: " + user.firstName + " " + user.lastName}</Text>
+          </Flex>
+        </Flex>
+        <Flex direction={"row"} h={"652px"}>
+          <Text size="1.5rem">{post.body}</Text>
+        </Flex>
+        <Flex direction={"row"} h={"600px"}>
+          <Flex mb={"1rem"}>
+            <Flex
+              w={"50%"}
+              direction={"column"}
+              h={"149px"}
+              mt={"6rem"}
+              justify={"center"}
+            >
               <p className="text-3xl pb-4">Comments</p>
               <input
                 type="text"
@@ -83,7 +98,7 @@ export default async function Blog({ params }: Params) {
                   Post
                 </button>
               </div>
-            </div>
+            </Flex>
             <div className="w-1/2 h-[393px] mt-24">
               <div className="flex flex-col gap-4">
                 <p className="text-3xl text-gray-700">Recent Comments</p>
@@ -160,9 +175,9 @@ export default async function Blog({ params }: Params) {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Container>
   );
 }
