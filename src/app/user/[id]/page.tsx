@@ -2,6 +2,8 @@ import React from "react";
 import { Params } from "@/app/blog/[id]/page";
 import { getPosts, getUsers } from "@/app/page";
 import Image from "next/image";
+import { Flex, Text } from "@mantine/core";
+import PostModal from "@/components/NewPostModal";
 
 export default async function User({ params }: Params) {
   const users = await getUsers();
@@ -11,6 +13,7 @@ export default async function User({ params }: Params) {
     (max: number = 29, min: number = 1) =>
       Math.floor(Math.random() * (max - min + 1)) + min
   );
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-row w-4/5  justify-center h-4/5 m-10">
@@ -55,7 +58,13 @@ export default async function User({ params }: Params) {
         </div>
         <div className="flex flex-row w-2/3 ">
           <div className="flex flex-col mt-24 font-bold">
-            <p className="text-4xl">My Posts</p>
+            <Flex direction={"row"} justify={"space-between"}>
+              <Text size="xl" fw={800}>
+                My Posts
+              </Text>
+              {/* <Button>Make a new post</Button> */}
+              <PostModal />
+            </Flex>
             <div className="flex flex-row h-40 w-[44rem] mt-10">
               <Image
                 src={`https://random.imagecdn.app/${String(

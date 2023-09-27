@@ -5,7 +5,6 @@ import Image from "next/image";
 import randomdate from "../components/randomdate.json";
 import { Comment, Post, User } from "@/types";
 import { Flex, Text } from "@mantine/core";
-import { useEffect } from "react";
 
 interface GetPostsResponse {
   posts: Post[];

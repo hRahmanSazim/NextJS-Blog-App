@@ -1,17 +1,11 @@
 "use client";
 import signUp from "@/firebase/auth/signup";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { Flex, Paper, Text, Button, TextInput } from "@mantine/core";
 
-import {
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 
 export default function Signup() {
@@ -20,11 +14,12 @@ export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const usersCollectionRef = collection(db, "users");
-  const postsCollectionRef = collection(db, "posts");
+  // const postsCollectionRef = usersCollectionRef.collection(db, "posts");
+
   // const uuidRef = doc(db, "UUID", "users");
   const router = useRouter();
 
-  const handleForm = async (event) => {
+  const handleForm = async (event: FormEvent) => {
     try {
       event.preventDefault();
       const { result } = await signUp(email, password);
@@ -42,14 +37,24 @@ export default function Signup() {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      UUID: localStorage.getItem("myUID"),
+      UUID: "",
     });
     // await updateDoc(uuidRef, {
     //   UUID: docRef.id,
     // });
+
+    // if uuid should be same as generated auto document id :-
+    await setDoc(
+      doc(db, "users", docRef.id),
+      {
+        UUID: docRef.id,
+      },
+      { merge: true }
+    );
+    localStorage.setItem("myUID", docRef.id);
   };
 
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<object[]>([]);
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -57,16 +62,24 @@ export default function Signup() {
       setUsers(data.docs.map((doc) => ({ ...doc.data() })));
     };
     getUsers();
-    getPosts();
+    // getPosts();
   }, []);
 
   // console.log("users", users);
-  const [posts, setPosts] = useState([]);
-  const getPosts = async () => {
-    const data = await getDocs(postsCollectionRef);
-    setPosts(data.docs.map((doc) => ({ ...doc.data() })));
-    // console.log(posts);
-  };
+  // const [posts, setPosts] = useState([]);
+  // const getPosts = async () => {
+  // const data = await getDocs(postsCollectionRef);
+  // setPosts(data.docs.map((doc) => ({ ...doc.data() })));
+  // await setDoc(doc(postsCollectionRef, localStorage.getItem("myUID")), {
+  //   name: "testing",
+  //   age: 20,
+  // });
+  // console.log(posts);
+  // };
+
+  //const documentRef = firestore.collection("users").doc(documentId);
+  // const nestedCollectionName = 'Posts';
+  // const nestedCollectionRef = documentRef.collection(nestedCollectionName);
 
   return (
     <Flex mih={"100%"} justify="center" align="center" direction="row">

@@ -8,7 +8,7 @@ export default async function signUp(email: string, password: string) {
 
   result = await createUserWithEmailAndPassword(auth, email, password);
 
-  localStorage.setItem("myUID", result.user.uid);
+  // localStorage.setItem("myUID", result.user.uid);
 
   return { result };
 }
