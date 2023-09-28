@@ -5,11 +5,19 @@ import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { Flex, Paper, Text, Button, TextInput } from "@mantine/core";
 
-import { collection, getDocs, addDoc, doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  setDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -26,7 +34,6 @@ export default function Signup() {
 
       // else successful
       createUser();
-      router.push("/");
     } catch (error) {
       alert(error);
     }
@@ -38,20 +45,33 @@ export default function Signup() {
       lastName: lastName,
       email: email,
       UUID: "",
+      avatar: "",
+      created_at: "",
     });
     // await updateDoc(uuidRef, {
     //   UUID: docRef.id,
     // });
 
     // if uuid should be same as generated auto document id :-
+    // console.log(docRef);
+    localStorage.setItem("myUID", docRef.id);
+
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("lastName", lastName);
+    localStorage.setItem("email", email);
     await setDoc(
       doc(db, "users", docRef.id),
       {
         UUID: docRef.id,
+        avatar: `https://www.gravatar.com/avatar/${localStorage.getItem(
+          "myUID"
+        )}?d=robohash`,
+        created_at: serverTimestamp(),
       },
+
       { merge: true }
     );
-    localStorage.setItem("myUID", docRef.id);
+    router.push(`/user/${localStorage.getItem("myUID")}`);
   };
 
   const [users, setUsers] = useState<object[]>([]);

@@ -33,7 +33,9 @@ export default function PostModal() {
       body: body,
       created_at: serverTimestamp(),
       user: {
-        avatar: "",
+        avatar: `https://www.gravatar.com/avatar/${localStorage.getItem(
+          "myUID"
+        )}?d=robohash`,
         email: data?.email,
         firstName: data?.firstName,
         lastName: data?.lastName,

@@ -1,33 +1,49 @@
 import React from "react";
 import { Params } from "@/app/blog/[id]/page";
-import { getPosts, getUsers } from "@/app/page";
 import Image from "next/image";
 import { Flex, Text } from "@mantine/core";
 import PostModal from "@/components/NewPostModal";
+import { db } from "@/firebase/firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 
 export default async function User({ params }: Params) {
-  const users = await getUsers();
-  const posts = await getPosts();
-  const randomImage = Array.from(
-    { length: 3 },
-    (max: number = 29, min: number = 1) =>
-      Math.floor(Math.random() * (max - min + 1)) + min
-  );
+  // const users = await getUsers();
+  // const posts = await getPosts();
+  const userRef = doc(db, "users", `${params.id}`);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+  // const randomImage = Array.from(
+  //   { length: 3 },
+  //   (max: number = 29, min: number = 1) =>
+  //     Math.floor(Math.random() * (max - min + 1)) + min
+  // );
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-row w-4/5  justify-center h-4/5 m-10">
-        <div className="flex flex-col w-1/3  justify-center ml-24 mb-4">
-          <div className=" flex flex-col w-64 h-96  text-center">
-            <div className="flex justify-start border-2 border-gray-200">
+    <Flex justify={"center"} align={"center"} h={"100vh"}>
+      <Flex
+        direction={"row"}
+        w={"80%"}
+        justify={"center"}
+        h={"80%"}
+        m={"2.5rem"}
+      >
+        <Flex
+          direction={"column"}
+          w={"33.333%"}
+          justify={"center"}
+          ml={"6rem"}
+          mb={"1rem"}
+        >
+          <Flex direction={"column"} w={"16rem"} h={"24rem"} align={"center"}>
+            <Flex justify={"start"}>
               <Image
-                src={users[Number(params.id) - 1].image}
+                src={userData?.avatar}
                 alt="avatar"
                 height={192}
                 width={276}
               ></Image>
-            </div>
-            <div className="pt-4">
+            </Flex>
+            {/* <div className="pt-4">
               {users[Number(params.id) - 1].firstName}{" "}
               {users[Number(params.id) - 1].lastName}
             </div>
@@ -53,99 +69,10 @@ export default async function User({ params }: Params) {
                 height={36}
                 width={36}
               ></Image>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-row w-2/3 ">
-          <div className="flex flex-col mt-24 font-bold">
-            <Flex direction={"row"} justify={"space-between"}>
-              <Text size="xl" fw={800}>
-                My Posts
-              </Text>
-              {/* <Button>Make a new post</Button> */}
-              <PostModal />
-            </Flex>
-            <div className="flex flex-row h-40 w-[44rem] mt-10">
-              <Image
-                src={`https://random.imagecdn.app/${String(
-                  Number(params.id) + 302
-                )}/199`}
-                alt="user_pic"
-                width={188}
-                height={159}
-              ></Image>
-              <div className="flex flex-col h-[46px] w-4/5 pl-4">
-                <div className="flex flex-row justify-between">
-                  <p>{posts[randomImage[0]].title}</p>
-                  <div className="pr-10 pb-4">
-                    <button className="text-gray-700 w-18 h-10 pr-4">
-                      Edit
-                    </button>
-                    <button className=" w-18 h-10 px-2 bg-red-800 text-white">
-                      <p className="">Delete</p>
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <p className="line-clamp-2">{posts[randomImage[0]].body}</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row h-40 w-[44rem]  mt-10">
-              <Image
-                src={`https://random.imagecdn.app/${String(
-                  Number(params.id) + 301
-                )}/199`}
-                alt="user_pic"
-                width={188}
-                height={159}
-              ></Image>
-              <div className="flex flex-col h-[46px] w-4/5 pl-4">
-                <div className="flex flex-row justify-between">
-                  <p className="truncate">{posts[randomImage[1]].title}</p>
-                  <div className="pr-10 pb-4">
-                    <button className="text-gray-700 w-18 h-10 pr-4">
-                      Edit
-                    </button>
-                    <button className=" w-18 h-10 px-2 bg-red-800 text-white">
-                      <p className="">Delete</p>
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <p className="line-clamp-2">{posts[randomImage[1]].body}</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row h-40 w-[44rem]  mt-10">
-              <Image
-                src={`https://random.imagecdn.app/${String(
-                  Number(params.id) + 300
-                )}/199`}
-                alt="user_pic"
-                width={188}
-                height={159}
-              ></Image>
-              <div className="flex flex-col h-[46px] w-4/5 pl-4">
-                <div className="flex flex-row justify-between">
-                  <p className="truncate">{posts[randomImage[2]].title}</p>
-                  <div className="pr-10 pb-4">
-                    <button className="text-gray-700 w-18 h-10 pr-4">
-                      Edit
-                    </button>
-                    <button className=" w-18 h-10 px-2 bg-red-800 text-white">
-                      <p className="truncate">Delete</p>
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <p className="line-clamp-2">{posts[randomImage[2]].body}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </div> */}
+          </Flex>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 }

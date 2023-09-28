@@ -4,6 +4,7 @@ const nextConfig = {};
 module.exports = {
   images: {
     domains: [
+      "www.gravatar.com",
       "images.unsplash.com",
       "i.dummyjson.com",
       "random.imagecdn.app",
