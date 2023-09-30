@@ -1,33 +1,82 @@
-import { Post } from "@/types";
+import { Flex, Text } from "@mantine/core";
 import Link from "next/link";
 import Image from "next/image";
-interface Props {
-  postData: Post[];
-}
 
-const PostList = ({ postData }: Props) => {
+import {
+  query,
+  orderBy,
+  limit,
+  collection,
+  getDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "@/firebase/firebase-config";
+
+const q = query(
+  collection(db, "posts"),
+  orderBy("created_at", "desc"),
+  limit(10)
+);
+const res: any = [];
+const querySnapshot = await getDocs(q);
+// const posts = querySnapshot.docs;
+querySnapshot.forEach((doc) => {
+  //   // let obj = {doc.id:doc.data()}
+  //   // doc.data() is never undefined for query doc snapshots
+  res.push({
+    id: doc.id,
+    ...doc.data(),
+  });
+});
+// console.log(querySnapshot.docs[0].data());
+// console.log(res);
+
+const PostList = () => {
   return (
-    <div className="flex flex-col gap-10 h-full	">
-      {postData.map((post) => (
-        <div key={post.id} className="flex flex-row gap-x-4 w-56 flex-wrap	">
-          <div className="flex flex-row">
-            <Image
-              src="https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80"
-              alt="tree"
-              // className="object-scale-down h-28"
-              height={20}
-              width={60}
-            />
+    <Flex w="100%" direction={"column"}>
+      <Flex justify={"center"} align={"center"} my={"xl"}>
+        <Text size="3rem" fw={700}>
+          Recent Posts
+        </Text>
+      </Flex>
 
-            <Link href={`/blog/${post.id}`}>
-              <p>{post.title}</p>
-            </Link>
-            <p>{post.body}</p>
-          </div>
-          {/* <p>{post.body}</p> */}
-        </div>
-      ))}
-    </div>
+      <Flex w="80rem" justify={"center"} align={"center"}>
+        <Flex h={"3.5rem"}> </Flex>
+        {res.map((obj: any) => (
+          <ul key={obj.id}>
+            <Flex direction={"row"} h={"250px"} mb={"1rem"}>
+              <Flex mb={"1rem"}>
+                <Flex w={"250px"}>
+                  <Image
+                    src={obj.cover_photo}
+                    alt="post_photo"
+                    width={250}
+                    height={250}
+                  />
+                </Flex>
+                <Flex direction={"column"}>
+                  <Link href={`/blog/${obj.id}`}>
+                    <Text size="1.5rem" pl="1.5rem">
+                      {obj.title}
+                    </Text>
+                  </Link>
+                  <Text c={"blue"} pl={"1.5rem"} size="1.5rem" pt={"0.5rem"}>
+                    Author: {obj.user.firstName} {obj.user.lastName}
+                  </Text>
+                  <Text w={"500px"} pl={"1.5rem"} lineClamp={5}>
+                    {obj.body}
+                  </Text>
+                  <Text c={"gray"} pl={"1.5rem"} pt={"1rem"}>
+                    Posted: {obj.created_at.toDate().toDateString()}
+                  </Text>
+                </Flex>
+              </Flex>
+            </Flex>
+          </ul>
+        ))}
+      </Flex>
+    </Flex>
   );
 };
 

@@ -23,18 +23,27 @@ export default async function User({ params }: Params) {
       <Flex
         direction={"row"}
         w={"80%"}
-        justify={"center"}
+        justify={"space-between"}
         h={"80%"}
         m={"2.5rem"}
+        bg={"teal"}
       >
         <Flex
           direction={"column"}
-          w={"33.333%"}
+          w={"33%"}
           justify={"center"}
           ml={"6rem"}
           mb={"1rem"}
+          bg={"orange"}
+          align={"center"}
         >
-          <Flex direction={"column"} w={"16rem"} h={"24rem"} align={"center"}>
+          <Flex
+            direction={"column"}
+            w={"16rem"}
+            h={"24rem"}
+            align={"center"}
+            bg={"grape"}
+          >
             <Flex justify={"start"}>
               <Image
                 src={userData?.avatar}
@@ -43,34 +52,11 @@ export default async function User({ params }: Params) {
                 width={276}
               ></Image>
             </Flex>
-            {/* <div className="pt-4">
-              {users[Number(params.id) - 1].firstName}{" "}
-              {users[Number(params.id) - 1].lastName}
-            </div>
-            <div className="text-blue-800">
-              {users[Number(params.id) - 1].company.title}
-            </div>
-            <div>{users[Number(params.id) - 1].address.address}</div>
-            <div>{users[Number(params.id) - 1].address.city}</div>
-            <div className="flex flex-row justify-center pt-2 gap-2">
-              <Image
-                src={
-                  "https://freelogopng.com/images/all_img/1657043345twitter-logo-png.png"
-                }
-                alt="avatar"
-                height={26}
-                width={26}
-              ></Image>
-              <Image
-                src={
-                  "https://img.freepik.com/premium-vector/linkedin-icon_488108-5.jpg?w=826"
-                }
-                alt="avatar"
-                height={36}
-                width={36}
-              ></Image>
-            </div> */}
           </Flex>
+        </Flex>
+        <Flex>
+          <Text>My Posts</Text>
+          <PostModal />
         </Flex>
       </Flex>
     </Flex>

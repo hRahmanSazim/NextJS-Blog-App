@@ -13,8 +13,12 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 
+function randomNumber(max: number, min: number): string {
+  return String(Math.trunc(Math.random() * (max - min) + min));
+}
 export default function PostModal() {
   const [opened, { open, close }] = useDisclosure(false);
+  const [coverphoto, setCoverPhoto] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const postsCollectionRef = collection(db, "posts");
@@ -32,6 +36,10 @@ export default function PostModal() {
       title: title,
       body: body,
       created_at: serverTimestamp(),
+      cover_photo: `https://picsum.photos/${randomNumber(
+        3000,
+        2900
+      )}/${randomNumber(3001, 2990)}`,
       user: {
         avatar: `https://www.gravatar.com/avatar/${localStorage.getItem(
           "myUID"
@@ -70,6 +78,13 @@ export default function PostModal() {
           size="lg"
           onChange={(e) => setTitle(e.target.value)}
         ></TextInput>
+        {/* <TextInput
+          label="Cover Photo"
+          placeholder="Provide link for your cover photo here..."
+          my="md"
+          size="lg"
+          onChange={(e) => setCoverPhoto(e.target.value)}
+        ></TextInput> */}
         <Textarea
           size="xl"
           radius="xs"

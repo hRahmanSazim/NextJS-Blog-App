@@ -71,6 +71,13 @@ export default function Signup() {
 
       { merge: true }
     );
+    localStorage.setItem(
+      "avatar",
+      `https://www.gravatar.com/avatar/${localStorage.getItem(
+        "myUID"
+      )}?d=robohash`
+    );
+
     router.push(`/user/${localStorage.getItem("myUID")}`);
   };
 

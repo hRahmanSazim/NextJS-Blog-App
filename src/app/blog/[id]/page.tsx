@@ -13,6 +13,7 @@ interface GetCommentResponse extends Comment {}
 
 const randomComment = () => Math.floor(Math.random() * (300 - 1)) + 1;
 export default async function Blog({ params }: Params) {
+  console.log(params.id);
   async function getPost(): Promise<Post> {
     const { data } = await axios.get<GetPostResponse>(
       `https://dummyjson.com/posts/${params.id}`

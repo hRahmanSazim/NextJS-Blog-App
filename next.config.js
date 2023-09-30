@@ -12,6 +12,7 @@ module.exports = {
       "robohash.org",
       "freelogopng.com",
       "img.freepik.com",
+      "plus.unsplash.com",
     ],
     disableStaticImages: true,
   },
