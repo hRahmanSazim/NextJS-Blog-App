@@ -36,10 +36,7 @@ export default function PostModal() {
       title: title,
       body: body,
       created_at: serverTimestamp(),
-      cover_photo: `https://picsum.photos/${randomNumber(
-        3000,
-        2900
-      )}/${randomNumber(3001, 2990)}`,
+      cover_photo: `https://picsum.photos/${randomNumber(3000, 2700)}/449`,
       user: {
         avatar: `https://www.gravatar.com/avatar/${localStorage.getItem(
           "myUID"

@@ -30,7 +30,7 @@ const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(
       {...others}
     >
       <Group>
-        <Avatar src={image} radius="xl" bg={"white"} />
+        <Avatar src={image} radius="xl" bg={"black"} />
 
         <div style={{ flex: 1 }}>
           <Text size="md" fw={500}>
@@ -60,7 +60,7 @@ export default function UserButton() {
     }
   };
   return (
-    <Menu>
+    <Menu withArrow>
       <Menu.Target>
         <MyButton
           image={`${localStorage.getItem("avatar")}`}
@@ -70,9 +70,11 @@ export default function UserButton() {
           email={`${localStorage.getItem("email")}`}
         />
       </Menu.Target>
-      <Menu.Dropdown>
+      <Menu.Dropdown bg={"blue"}>
         <Menu.Item>
-          <Button onClick={logout}>Logout</Button>
+          <Button c={"black"} onClick={logout} size="1rem" h={"1.5rem"}>
+            Logout{" "}
+          </Button>
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

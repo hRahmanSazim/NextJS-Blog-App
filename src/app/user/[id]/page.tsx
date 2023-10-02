@@ -1,7 +1,7 @@
 import React from "react";
 import { Params } from "@/app/blog/[id]/page";
 import Image from "next/image";
-import { Flex, Text } from "@mantine/core";
+import { Center, Flex, Text, Paper, Container } from "@mantine/core";
 import PostModal from "@/components/NewPostModal";
 import { db } from "@/firebase/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
@@ -19,44 +19,67 @@ export default async function User({ params }: Params) {
   // );
 
   return (
-    <Flex justify={"center"} align={"center"} h={"100vh"}>
+    <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
       <Flex
-        direction={"row"}
+        // direction={"column"}
         w={"80%"}
-        justify={"space-between"}
         h={"80%"}
-        m={"2.5rem"}
-        bg={"teal"}
       >
-        <Flex
-          direction={"column"}
-          w={"33%"}
-          justify={"center"}
-          ml={"6rem"}
-          mb={"1rem"}
-          bg={"orange"}
-          align={"center"}
-        >
-          <Flex
-            direction={"column"}
-            w={"16rem"}
-            h={"24rem"}
-            align={"center"}
-            bg={"grape"}
-          >
-            <Flex justify={"start"}>
-              <Image
-                src={userData?.avatar}
-                alt="avatar"
-                height={192}
-                width={276}
-              ></Image>
+        <Flex w={"33%"} h={"100%"} justify={"center"} align={"center"}>
+          <Flex h={"55%"} w={"50%"} direction={"column"}>
+            <Flex h={"60%"} w={"100%"}>
+              <Paper shadow="xl" withBorder radius={"xl"}>
+                <Image
+                  alt="user_image"
+                  src={`${userData?.avatar}`}
+                  width={260}
+                  height={250}
+                ></Image>
+              </Paper>
             </Flex>
+            <Center>
+              <Flex direction={"column"} m={"lg"}>
+                <Flex direction={"row"} justify={"center"}>
+                  <Text size="1.5rem">
+                    {userData?.firstName.toUpperCase()}{" "}
+                    {userData?.lastName.toUpperCase()}
+                  </Text>
+                </Flex>
+                <Flex mt={"1rem"}>{userData?.email}</Flex>
+                <Flex direction={"row"} mt={"sm"} justify={"center"}>
+                  <Image
+                    alt="linkedin"
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/commons/f/f8/LinkedIn_icon_circle.svg"
+                    }
+                    width={25}
+                    height={25}
+                  ></Image>
+                  <Image
+                    alt="twitter"
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1024px-X_logo_2023.svg.png"
+                    }
+                    width={22}
+                    height={22}
+                  ></Image>
+                </Flex>
+              </Flex>
+            </Center>
           </Flex>
         </Flex>
-        <Flex>
-          <Text>My Posts</Text>
-          <PostModal />
+        <Flex
+          w={"67%"}
+          h={"100%"}
+          bg={"yellow"}
+          justify={"center"}
+          align={"center"}
+        >
+          <Flex w={"90%"} h={"90%"} bg={"teal"}>
+            <Text size="3rem" fw={700}>
+              My Posts
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

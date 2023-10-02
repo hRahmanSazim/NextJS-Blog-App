@@ -8,7 +8,7 @@ import { AppShell, Flex, Text } from "@mantine/core";
 export function HeaderDefault() {
   const renderLogout = localStorage.getItem("myUID") !== null;
   return (
-    <AppShell header={{ height: 60 }}>
+    <AppShell header={{ height: 65 }}>
       <AppShell.Header bg={"#4069E5FF"} c={"white"}>
         <Flex direction={"row"} justify={"space-around"} align={"center"}>
           <Flex

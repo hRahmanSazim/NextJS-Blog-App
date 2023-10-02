@@ -13,6 +13,8 @@ module.exports = {
       "freelogopng.com",
       "img.freepik.com",
       "plus.unsplash.com",
+      "icons8.com",
+      "upload.wikimedia.org",
     ],
     disableStaticImages: true,
   },
