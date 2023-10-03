@@ -1,30 +1,20 @@
 import React from "react";
 import { Params } from "@/app/blog/[id]/page";
 import Image from "next/image";
-import { Center, Flex, Text, Paper, Container } from "@mantine/core";
-import PostModal from "@/components/NewPostModal";
+import { Center, Flex, Text, Paper } from "@mantine/core";
 import { db } from "@/firebase/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
+import UserPostList from "@/components/UserPostList";
+import NewPostModal from "@/components/NewPostModal";
 
 export default async function User({ params }: Params) {
-  // const users = await getUsers();
-  // const posts = await getPosts();
   const userRef = doc(db, "users", `${params.id}`);
   const userSnap = await getDoc(userRef);
   const userData = userSnap.data();
-  // const randomImage = Array.from(
-  //   { length: 3 },
-  //   (max: number = 29, min: number = 1) =>
-  //     Math.floor(Math.random() * (max - min + 1)) + min
-  // );
 
   return (
     <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
-      <Flex
-        // direction={"column"}
-        w={"80%"}
-        h={"80%"}
-      >
+      <Flex w={"80%"} h={"80%"}>
         <Flex w={"33%"} h={"100%"} justify={"center"} align={"center"}>
           <Flex h={"55%"} w={"50%"} direction={"column"}>
             <Flex h={"60%"} w={"100%"}>
@@ -68,17 +58,17 @@ export default async function User({ params }: Params) {
             </Center>
           </Flex>
         </Flex>
-        <Flex
-          w={"67%"}
-          h={"100%"}
-          bg={"yellow"}
-          justify={"center"}
-          align={"center"}
-        >
-          <Flex w={"90%"} h={"90%"} bg={"teal"}>
-            <Text size="3rem" fw={700}>
-              My Posts
-            </Text>
+        <Flex w={"67%"} h={"100%"} justify={"center"} align={"center"}>
+          <Flex w={"90%"} h={"90%"} direction={"column"}>
+            <Flex direction={"row"} justify={"space-between"}>
+              <Text size="3rem" fw={700}>
+                My Posts
+              </Text>
+              <NewPostModal />
+            </Flex>
+            <Flex w={"100%"} h={"100%"}>
+              <UserPostList params={params} />
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

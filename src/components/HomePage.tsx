@@ -5,6 +5,8 @@ import Link from "next/link";
 import UserButton from "./UserButton";
 import { AppShell, Flex, Text } from "@mantine/core";
 
+export const myUID = localStorage.getItem("myUID");
+
 export function HeaderDefault() {
   const renderLogout = localStorage.getItem("myUID") !== null;
   return (
@@ -26,13 +28,20 @@ export function HeaderDefault() {
 
           <Flex direction={"row"} pt={"0.5rem"}>
             <Flex direction={"column"} justify={"center"} align={"center"}>
-              <Link
-                href={`/user/${localStorage.getItem("myUID")}`}
-                target="_"
-                className="underline text-1xl text-blue-500 pr-4"
-              >
-                My Posts
-              </Link>
+              {localStorage.getItem("myUID") !== null && (
+                <Link
+                  href={`/user/${localStorage.getItem("myUID")}`}
+                  target="_"
+                  className="underline text-1xl  pr-4"
+                >
+                  My Posts
+                </Link>
+              )}
+              {/* {localStorage.getItem("myUID") === null && (
+                <Link href={"/"} className="underline text-1xl  pr-4">
+                  My Posts
+                </Link>
+              )} */}
             </Flex>
             <Flex direction={"column"} justify={"center"} align={"center"}>
               <Link
@@ -67,21 +76,21 @@ export function HomeCarousel() {
   return (
     <Carousel>
       <Image
-        src={"https://picsum.photos/2000/320"}
+        src={"https://picsum.photos/2000/350"}
         alt="image 1"
-        height={320}
+        height={350}
         width={2000}
       />
       <Image
-        src={"https://picsum.photos/2001/320"}
+        src={"https://picsum.photos/2001/350"}
         alt="image 2"
-        height={320}
+        height={350}
         width={2000}
       />
       <Image
-        src={"https://picsum.photos/2002/320"}
+        src={"https://picsum.photos/2002/350"}
         alt="image 3"
-        height={320}
+        height={350}
         width={2000}
       />
     </Carousel>

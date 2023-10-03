@@ -12,11 +12,16 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
+import { useRouter } from "next/navigation";
+
+//...
 
 function randomNumber(max: number, min: number): string {
   return String(Math.trunc(Math.random() * (max - min) + min));
 }
 export default function PostModal() {
+  const router = useRouter();
+
   const [opened, { open, close }] = useDisclosure(false);
   const [coverphoto, setCoverPhoto] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -47,6 +52,7 @@ export default function PostModal() {
       },
       userId: localStorage.getItem("myUID"),
     });
+    router.refresh();
     // await updateDoc(uuidRef, {
     //   UUID: docRef.id,
     // });

@@ -22,17 +22,11 @@ export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const usersCollectionRef = collection(db, "users");
-  // const postsCollectionRef = usersCollectionRef.collection(db, "posts");
-
-  // const uuidRef = doc(db, "UUID", "users");
   const router = useRouter();
-
   const handleForm = async (event: FormEvent) => {
     try {
       event.preventDefault();
       const { result } = await signUp(email, password);
-
-      // else successful
       createUser();
     } catch (error) {
       alert(error);
@@ -48,14 +42,7 @@ export default function Signup() {
       avatar: "",
       created_at: "",
     });
-    // await updateDoc(uuidRef, {
-    //   UUID: docRef.id,
-    // });
-
-    // if uuid should be same as generated auto document id :-
-    // console.log(docRef);
     localStorage.setItem("myUID", docRef.id);
-
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
     localStorage.setItem("email", email);
@@ -89,24 +76,7 @@ export default function Signup() {
       setUsers(data.docs.map((doc) => ({ ...doc.data() })));
     };
     getUsers();
-    // getPosts();
   }, []);
-
-  // console.log("users", users);
-  // const [posts, setPosts] = useState([]);
-  // const getPosts = async () => {
-  // const data = await getDocs(postsCollectionRef);
-  // setPosts(data.docs.map((doc) => ({ ...doc.data() })));
-  // await setDoc(doc(postsCollectionRef, localStorage.getItem("myUID")), {
-  //   name: "testing",
-  //   age: 20,
-  // });
-  // console.log(posts);
-  // };
-
-  //const documentRef = firestore.collection("users").doc(documentId);
-  // const nestedCollectionName = 'Posts';
-  // const nestedCollectionRef = documentRef.collection(nestedCollectionName);
 
   return (
     <Flex mih={"100%"} justify="center" align="center" direction="row">
