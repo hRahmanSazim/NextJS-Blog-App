@@ -33,7 +33,6 @@ export default function Signup() {
     }
   };
   const createUser = async () => {
-    // const userRef = doc(usersCollectionRef);
     const docRef = await addDoc(usersCollectionRef, {
       firstName: firstName,
       lastName: lastName,
