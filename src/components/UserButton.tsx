@@ -71,8 +71,8 @@ export default function UserButton() {
         />
       </Menu.Target>
       <Menu.Dropdown bg={"blue"}>
-        <Menu.Item>
-          <Button c={"black"} onClick={logout} size="1rem" h={"1.5rem"}>
+        <Menu.Item bg={"blue"}>
+          <Button onClick={logout} size="1rem" h={"1.5rem"}>
             Logout{" "}
           </Button>
         </Menu.Item>

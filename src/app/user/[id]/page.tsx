@@ -29,7 +29,7 @@ export default async function User({ params }: Params) {
             </Flex>
             <Center>
               <Flex direction={"column"} m={"lg"}>
-                <Flex direction={"row"} justify={"center"}>
+                <Flex direction={"row"} justify={"center"} align={"center"}>
                   <Text size="1.5rem">
                     {userData?.firstName.toUpperCase()}{" "}
                     {userData?.lastName.toUpperCase()}

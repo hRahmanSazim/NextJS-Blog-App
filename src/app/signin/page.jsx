@@ -9,10 +9,16 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const userRef = collection(db, "users");
 
   const [test, setTest] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getDoc = async () => {
+      const q = query(citiesRef, where("email", "==", result.user.email));
+      const user = await getDocs(q);
+    };
+  }, []);
 
   const handleForm = async (event) => {
     event.preventDefault();
@@ -25,11 +31,12 @@ export default function SignIn() {
     if (error) {
       alert("wrong credentials");
       return console.log(error);
+    } else {
+      router.push("/");
     }
 
     // else successful
     console.log(result);
-    return router.push("/");
   };
 
   // if (test === "") {

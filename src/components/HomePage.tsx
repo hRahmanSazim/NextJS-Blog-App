@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import UserButton from "./UserButton";
 import { AppShell, Flex, Text } from "@mantine/core";
+import { useEffect, useState } from "react";
 
-export const myUID = localStorage.getItem("myUID");
-
-export function HeaderDefault() {
-  const renderLogout = localStorage.getItem("myUID") !== null;
+export function Header() {
+  const [uid, setUID] = useState(false);
+  useEffect(() => {
+    setUID(localStorage.getItem("myUID") !== null);
+  }, []);
   return (
     <AppShell header={{ height: 65 }}>
       <AppShell.Header bg={"#4069E5FF"} c={"white"}>
@@ -28,7 +30,7 @@ export function HeaderDefault() {
 
           <Flex direction={"row"} pt={"0.5rem"}>
             <Flex direction={"column"} justify={"center"} align={"center"}>
-              {localStorage.getItem("myUID") !== null && (
+              {uid && (
                 <Link
                   href={`/user/${localStorage.getItem("myUID")}`}
                   target="_"
@@ -53,7 +55,7 @@ export function HeaderDefault() {
               </Link>
             </Flex>
 
-            {!renderLogout && (
+            {!uid && (
               <Flex direction={"column"} justify={"center"} align={"center"}>
                 <Link
                   href={"/signup"}
@@ -64,7 +66,7 @@ export function HeaderDefault() {
               </Flex>
             )}
 
-            {renderLogout && <UserButton />}
+            {uid && <UserButton />}
           </Flex>
         </Flex>
       </AppShell.Header>

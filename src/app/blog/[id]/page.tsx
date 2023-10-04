@@ -1,21 +1,15 @@
 import Image from "next/image";
-
 import { Container, Flex, Button, Text, TextInput } from "@mantine/core";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
-
+import PostComment from "@/components/PostComment";
+import CommentList from "@/components/CommentList";
 // const q = query(postsRef, where("docRef.id", "==", "CA"));
 export interface Params {
   params: { id: string };
 }
-// interface GetPostResponse extends Post {}
-// interface GetUserResponse extends User {}
-// interface GetCommentResponse extends Comment {}
-
-// const randomComment = () => Math.floor(Math.random() * (300 - 1)) + 1;
 
 export default async function Blog({ params }: Params) {
-  // console.log(params.id);
   // const postsRef = collection(db, "posts");
   // const [commentBody, setCommentBody] = useState("");
   const docRef = doc(db, "posts", `${params.id}`);
@@ -24,22 +18,6 @@ export default async function Blog({ params }: Params) {
   if (!docSnap.exists()) {
     console.log("No such document!");
   }
-  const commentsRef = collection(
-    doc(collection(db, "posts"), `${params.id}`),
-    "comments"
-  );
-
-  const handleComment = async () => {
-    if (localStorage.getItem("myUID") !== null) {
-      await addDoc(commentsRef, {
-        firstName: localStorage.getItem("firstName"),
-        lastName: localStorage.getItem("lastName"),
-        avatar: localStorage.getItem("avatar"),
-        body: "commentBody",
-        userID: localStorage.getItem("myUID"),
-      });
-    }
-  };
 
   // async function getPost(): Promise<Post> {
   //   const { data } = await axios.get<GetPostResponse>(
@@ -87,18 +65,17 @@ export default async function Blog({ params }: Params) {
       </Flex>
       <Flex
         h={"100vh"}
-        w={"959px"}
+        w={"80%"}
         m={"auto"}
         gap={"2rem"}
         direction={"column"}
+        // bg={"grape"}
       >
-        <Flex direction={"row"} h={"14rem"} bg={"white"} pt={"6rem"}></Flex>
-
-        <Flex direction={"row"} h={"3.5rem"} pb={"1.5rem"}>
+        <Flex direction={"row"} h={"3.5rem"} mt={"xl"}>
           <Text size="3rem">{docSnap.data()?.title}</Text>
         </Flex>
-        <Flex pt={"1rem"} pb={"2rem"}>
-          <Flex w={"5rem"} h={"5rem"}>
+        <Flex>
+          <Flex w={"4rem"} h={"4rem"}>
             <Image
               src={docSnap.data()?.user.avatar}
               alt="avatar"
@@ -124,110 +101,39 @@ export default async function Blog({ params }: Params) {
             </Text>
           </Flex>
         </Flex>
-        <Flex direction={"row"} h={"652px"}>
-          <Text size="1.5rem">{docSnap.data()?.body}</Text>
+        <Flex direction={"row"} h={"40%"}>
+          <Text size="1.5rem" lineClamp={8}>
+            {docSnap.data()?.body}
+          </Text>
         </Flex>
-        <Flex direction={"row"} h={"600px"}>
-          <Flex mb={"1rem"}>
-            <Flex
-              w={"30rem"}
-              direction={"column"}
-              h={"20rem"}
-              mt={"6rem"}
-              justify={"center"}
-            >
-              <Text size="2rem" pb={"1rem"}>
-                Comments
-              </Text>
-              <TextInput
-                // className="h-[120px] w-11/12 border-gray-300 border-4 "
-                placeholder="Your comments...."
-                h={"60px"}
-                // size="2rem"
-                label=""
-              />
-              <Flex>
-                <Button bg={"blue"} w={"4.5rem"} h={"2.25rem"} c={"white"}>
-                  Post
-                </Button>
+        <Flex direction={"row"} w={"100%"} h={"100%"}>
+          <Flex direction={"column"} w={"45%"} h={"100%"}>
+            <Flex mb={"1rem"}>
+              <Flex
+                w={"30rem"}
+                direction={"column"}
+                h={"20rem"}
+                mt={"6rem"}
+                justify={"center"}
+              >
+                <Text size="2rem" pb={"1rem"}>
+                  Comments
+                </Text>
+                <PostComment params={params} />
               </Flex>
             </Flex>
-            <Flex h={"10rem"} bg={"yellow"}>
-              {/* <div className="flex flex-col gap-4">
-                <p className="text-3xl text-gray-700">Recent Comments</p>
-                <div className="w-11/12 h-[119px] border-2 border-gray-200">
-                  <div className="flex w-3/4 pl-1">
-                    <div className=" w-20 h-20 rounded-full pr-2">
-                      <Image
-                        src={userOne.image}
-                        alt="avatar 1"
-                        width={60}
-                        height={60}
-                      ></Image>
-                    </div>
-                    <div className="flex-col">
-                      <div className="w-3/4 h-12">
-                        <p>{commentOne.user.username}</p>
-                      </div>
-                      <div>
-                        <StarComponent />
-                      </div>
-                      <div>
-                        <p>{commentOne.body}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="  w-11/12 h-[119px] border-2 border-gray-200 ">
-                  <div className="flex w-3/4 pl-1">
-                    <div className=" w-20 h-20 rounded-full pr-2">
-                      <Image
-                        src={userTwo.image}
-                        alt="avatar 1"
-                        width={60}
-                        height={60}
-                        style={{ objectFit: "contain" }}
-                      ></Image>
-                    </div>
-                    <div className="flex-col">
-                      <div className="w-3/4 h-12">
-                        <p>{commentTwo.user.username}</p>
-                      </div>
-                      <div>
-                        <StarComponent />
-                      </div>
-                      <div>
-                        <p>{commentTwo.body}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-11/12 h-[119px] border-2 border-gray-200 ">
-                  <div className="flex w-3/4 pl-1">
-                    <div className=" w-20 h-20 rounded-full pr-2">
-                      <Image
-                        src={userThree.image}
-                        alt="avatar 1"
-                        width={60}
-                        height={60}
-                        style={{ objectFit: "contain" }}
-                      ></Image>
-                    </div>
-                    <div className="flex-col text-justify">
-                      <div className="w-3/4 h-12">
-                        <p>{commentThree.user.username}</p>
-                      </div>
-                      <div>
-                        <StarComponent />
-                      </div>
-                      <div>
-                        <p>{commentThree.body}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+          </Flex>
+          <Flex w={"55%"} h={"100%"} bg={"reds"} direction={"column"}>
+            <Flex direction={"row"} w={"100%"} h={"20%"} gap={"xs"}>
+              <Text size="2rem" c={"gray"}>
+                Recent
+              </Text>
+              <Text size="2rem" c={"gray"}>
+                Comments
+              </Text>
             </Flex>
+
+            <CommentList params={params} />
           </Flex>
         </Flex>
       </Flex>

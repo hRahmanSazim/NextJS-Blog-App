@@ -1,7 +1,6 @@
 import { Flex, Text } from "@mantine/core";
 import Link from "next/link";
 import Image from "next/image";
-
 import { query, orderBy, limit, collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 
