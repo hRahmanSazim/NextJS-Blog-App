@@ -53,11 +53,12 @@ export default function UserButton() {
   const pathname = usePathname();
   const logout = () => {
     localStorage.clear();
-    if (pathname === "/") {
-      router.refresh();
-    } else {
+
+    if (pathname !== "/") {
       router.push("/");
     }
+    router.refresh();
+    router.refresh();
   };
   return (
     <Menu withArrow>
@@ -73,7 +74,7 @@ export default function UserButton() {
       <Menu.Dropdown bg={"blue"}>
         <Menu.Item bg={"blue"}>
           <Button onClick={logout} size="1rem" h={"1.5rem"}>
-            Logout{" "}
+            Logout
           </Button>
         </Menu.Item>
       </Menu.Dropdown>
