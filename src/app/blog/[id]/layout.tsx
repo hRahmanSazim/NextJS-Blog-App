@@ -1,4 +1,4 @@
-import { HeaderDefault } from "@/components/HomePage";
+import { Header } from "@/components/HomePage";
 
 export default function ShopLayout({
   children,
@@ -12,7 +12,7 @@ export default function ShopLayout({
 }) {
   return (
     <section>
-      <HeaderDefault />
+      <Header />
       {children}
     </section>
   );

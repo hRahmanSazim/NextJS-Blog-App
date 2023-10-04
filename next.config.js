@@ -4,6 +4,7 @@ const nextConfig = {};
 module.exports = {
   images: {
     domains: [
+      "www.gravatar.com",
       "images.unsplash.com",
       "i.dummyjson.com",
       "random.imagecdn.app",
@@ -11,6 +12,9 @@ module.exports = {
       "robohash.org",
       "freelogopng.com",
       "img.freepik.com",
+      "plus.unsplash.com",
+      "icons8.com",
+      "upload.wikimedia.org",
     ],
     disableStaticImages: true,
   },
