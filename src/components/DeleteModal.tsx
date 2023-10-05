@@ -6,6 +6,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 import { useRouter } from "next/navigation";
 import { ParamObjects } from "./EditModal";
+import { TbTrashX } from "react-icons/tb";
 
 export default function DeleteModal({ obj }: ParamObjects) {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function DeleteModal({ obj }: ParamObjects) {
         </Flex>
       </Modal>
       <Button onClick={open} bg={"red"}>
-        Delete
+        <TbTrashX size="1.5rem"></TbTrashX>
       </Button>
     </>
   );

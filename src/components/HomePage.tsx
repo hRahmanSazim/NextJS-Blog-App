@@ -5,12 +5,15 @@ import Link from "next/link";
 import UserButton from "./UserButton";
 import { AppShell, Flex, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Header() {
   const [uid, setUID] = useState(false);
   useEffect(() => {
     setUID(localStorage.getItem("myUID") !== null);
   }, []);
+  const pathname = usePathname();
+
   return (
     <AppShell header={{ height: 65 }}>
       <AppShell.Header bg={"#4069E5FF"} c={"white"}>
@@ -30,15 +33,20 @@ export function Header() {
 
           <Flex direction={"row"} pt={"0.5rem"}>
             <Flex direction={"column"} justify={"center"} align={"center"}>
-              {uid && (
-                <Link
-                  href={`/user/${localStorage.getItem("myUID")}`}
-                  target="_"
-                  className="underline text-1xl  pr-4"
-                >
-                  My Posts
-                </Link>
+              {pathname === "/" ? (
+                uid && (
+                  <Link
+                    href={`/user/${localStorage.getItem("myUID")}`}
+                    target="_"
+                    className="underline text-1xl  pr-4"
+                  >
+                    My Posts
+                  </Link>
+                )
+              ) : (
+                <Flex></Flex>
               )}
+
               {/* {localStorage.getItem("myUID") === null && (
                 <Link href={"/"} className="underline text-1xl  pr-4">
                   My Posts

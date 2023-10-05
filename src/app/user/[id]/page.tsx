@@ -6,12 +6,13 @@ import { db } from "@/firebase/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import UserPostList from "@/components/UserPostList";
 import NewPostModal from "@/components/NewPostModal";
+import { RiTwitterXFill } from "react-icons/ri";
+import { AiOutlineLinkedin } from "react-icons/ai";
 
 export default async function User({ params }: Params) {
   const userRef = doc(db, "users", `${params.id}`);
   const userSnap = await getDoc(userRef);
   const userData = userSnap.data();
-
   return (
     <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
       <Flex w={"80%"} h={"80%"}>
@@ -37,22 +38,12 @@ export default async function User({ params }: Params) {
                 </Flex>
                 <Flex mt={"1rem"}>{userData?.email}</Flex>
                 <Flex direction={"row"} mt={"sm"} justify={"center"}>
-                  <Image
-                    alt="linkedin"
-                    src={
-                      "https://upload.wikimedia.org/wikipedia/commons/f/f8/LinkedIn_icon_circle.svg"
-                    }
-                    width={25}
-                    height={25}
-                  ></Image>
-                  <Image
-                    alt="twitter"
-                    src={
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1024px-X_logo_2023.svg.png"
-                    }
-                    width={22}
-                    height={22}
-                  ></Image>
+                  <Flex>
+                    <RiTwitterXFill size="1.4rem"></RiTwitterXFill>
+                  </Flex>
+                  <Flex>
+                    <AiOutlineLinkedin size="1.5rem"></AiOutlineLinkedin>
+                  </Flex>
                 </Flex>
               </Flex>
             </Center>

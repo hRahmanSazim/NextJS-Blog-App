@@ -96,7 +96,7 @@ export default function Signup() {
             />
 
             <TextInput
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(toTitleCase(e.target.value))}
               label="First Name"
               required
               type="text"
@@ -108,7 +108,7 @@ export default function Signup() {
               size="lg"
             />
             <TextInput
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(toTitleCase(e.target.value))}
               label="Last Name"
               required
               type="text"
@@ -151,4 +151,9 @@ export default function Signup() {
       </Paper>
     </Flex>
   );
+}
+function toTitleCase(inputString: string) {
+  const firstLetter = inputString.charAt(0).toUpperCase();
+  const restOfWord = inputString.slice(1).toLowerCase();
+  return firstLetter + restOfWord;
 }

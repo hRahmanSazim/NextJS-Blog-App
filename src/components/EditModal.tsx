@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 import { useRouter } from "next/navigation";
+import { HiOutlinePencil } from "react-icons/hi";
 export interface ParamObjects {
   obj: {
     id: string;
@@ -93,7 +94,7 @@ export default function EditModal({ obj }: ParamObjects) {
         </Button>
       </Modal>
       <Button onClick={open} bg={"violet"}>
-        Edit
+        <HiOutlinePencil size="1.5rem"></HiOutlinePencil>
       </Button>
     </>
   );
