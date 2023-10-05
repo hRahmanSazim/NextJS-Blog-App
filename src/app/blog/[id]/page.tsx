@@ -4,6 +4,7 @@ import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config";
 import PostComment from "@/components/PostComment";
 import CommentList from "@/components/CommentList";
+import { ScrollArea } from "@mantine/core";
 // const q = query(postsRef, where("docRef.id", "==", "CA"));
 export interface Params {
   params: { id: string };
@@ -72,7 +73,9 @@ export default async function Blog({ params }: Params) {
         // bg={"grape"}
       >
         <Flex direction={"row"} h={"3.5rem"} mt={"xl"}>
-          <Text size="3rem">{docSnap.data()?.title}</Text>
+          <Text size="3rem" lineClamp={1}>
+            {docSnap.data()?.title}
+          </Text>
         </Flex>
         <Flex>
           <Flex w={"4rem"} h={"4rem"}>
@@ -101,10 +104,10 @@ export default async function Blog({ params }: Params) {
             </Text>
           </Flex>
         </Flex>
-        <Flex direction={"row"} h={"40%"}>
-          <Text size="1.5rem" lineClamp={8}>
-            {docSnap.data()?.body}
-          </Text>
+        <Flex direction={"row"} h={"60%"}>
+          <ScrollArea h={"80%"} type="auto" scrollbarSize={12}>
+            <Text size="1.5rem">{docSnap.data()?.body}</Text>
+          </ScrollArea>
         </Flex>
         <Flex direction={"row"} w={"100%"} h={"100%"}>
           <Flex direction={"column"} w={"45%"} h={"100%"}>
@@ -113,8 +116,8 @@ export default async function Blog({ params }: Params) {
                 w={"30rem"}
                 direction={"column"}
                 h={"20rem"}
-                mt={"6rem"}
-                justify={"center"}
+                // mt={"6rem"}
+                justify={"flex-start"}
               >
                 <Text size="2rem" pb={"1rem"}>
                   Comments
@@ -123,7 +126,7 @@ export default async function Blog({ params }: Params) {
               </Flex>
             </Flex>
           </Flex>
-          <Flex w={"55%"} h={"100%"} bg={"reds"} direction={"column"}>
+          <Flex w={"55%"} h={"100%"} direction={"column"}>
             <Flex direction={"row"} w={"100%"} h={"20%"} gap={"xs"}>
               <Text size="2rem" c={"gray"}>
                 Recent

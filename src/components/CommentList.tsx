@@ -30,39 +30,51 @@ export default async function CommentList({ params }: Params) {
     });
   });
   return (
-    <Flex direction={"column"} justify={"center"} align={"center"} ml={"lg"}>
+    <Flex
+      direction={"column"}
+      justify={"center"}
+      align={"center"}
+      ml={"lg"}
+      mt={"lg"}
+    >
       <Flex w="100%" direction={"column"}>
-        {res.map((obj: any) => (
-          <ul key={obj.id}>
-            <Flex direction={"row"} h={"50%"} mb={"1rem"}>
-              <Image
-                src={obj.avatar}
-                alt="avatar"
-                width={40}
-                height={20}
-              ></Image>
-              <Flex mb={"1rem"}>
-                <Flex direction={"column"} gap={"sm"}>
-                  <Text c={"black"} pl={"1.5rem"} size="1.5rem" pt={"0.5rem"}>
-                    Author: {obj.firstName} {obj.lastName}{" "}
-                  </Text>
-                  <Flex ml={"1.2rem"}>
-                    <StarComponent />
-                  </Flex>
-                  <Link href={`/blog/${obj.id}`}>
-                    <Text size="1.5rem" pl="1.5rem" lineClamp={2}>
-                      {obj.body}
+        {res.length > 0 ? (
+          res.map((obj: any) => (
+            <ul key={obj.id}>
+              <Flex direction={"row"} h={"50%"} mb={"1rem"}>
+                <Image
+                  src={obj.avatar}
+                  alt="avatar"
+                  width={40}
+                  height={20}
+                ></Image>
+                <Flex mb={"1rem"}>
+                  <Flex direction={"column"} gap={"sm"}>
+                    <Text c={"black"} pl={"1.5rem"} size="1.5rem" pt={"0.5rem"}>
+                      Author: {obj.firstName} {obj.lastName}{" "}
                     </Text>
-                  </Link>
+                    <Flex ml={"1.2rem"}>
+                      <StarComponent />
+                    </Flex>
+                    <Link href={`/blog/${obj.id}`}>
+                      <Text size="1.5rem" pl="1.5rem" lineClamp={2}>
+                        {obj.body}
+                      </Text>
+                    </Link>
 
-                  {/* <Text c={"gray"} pl={"1.5rem"} pt={"1rem"}>
+                    {/* <Text c={"gray"} pl={"1.5rem"} pt={"1rem"}>
                     Posted: {obj.created_at.toDate().toDateString()}
                   </Text> */}
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
-          </ul>
-        ))}
+            </ul>
+          ))
+        ) : (
+          <Flex justify={"center"}>
+            <Text size="2rem">No Comments yet!!</Text>
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );
