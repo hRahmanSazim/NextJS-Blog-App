@@ -7,7 +7,7 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sazim Blog",
+  title: "InspireInk Blog",
   description: "A Blog site made using NEXT-JS",
 };
 

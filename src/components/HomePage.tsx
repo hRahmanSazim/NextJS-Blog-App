@@ -25,8 +25,8 @@ export function Header() {
             pt={"0.5rem"}
           >
             <Link href="/">
-              <Text size="2.25rem" fw={"bolder"}>
-                Sazim Blog
+              <Text size="2.25rem" fw={"bolder"} c={"black"}>
+                InspireInk
               </Text>
             </Link>
           </Flex>
