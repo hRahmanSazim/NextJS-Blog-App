@@ -33,10 +33,7 @@ export interface ParamObjects {
 
 export default function EditModal({ obj }: ParamObjects) {
   const router = useRouter();
-  console.log(obj);
-
   const [opened, { open, close }] = useDisclosure(false);
-
   const [title, setTitle] = useState<string>(obj.title);
   const [body, setBody] = useState<string>(obj.body);
   const postsRef = collection(db, "posts");
